@@ -1,6 +1,8 @@
 protoc-jar
 ==========
 
+This was forked from [os72/protoc-jar-maven-plugin](https://github.com/os72/protoc-jar-maven-plugin) because we need to use the 3.2.0.2-SNAPSHOT that have the filesystem issue fixed. The groupId was changed from com.github.os72 to com.symphony to avoid conflicts.
+
 Protocol Buffers protobuf compiler - multi-platform executable protoc JAR and API.
 Available on Maven Central: http://central.maven.org/maven2/com/github/os72/protoc-jar/3.2.0.1/
 
