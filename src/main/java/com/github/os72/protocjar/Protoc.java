@@ -69,6 +69,7 @@ public class Protoc
 		
 		List<String> protocCmd = new ArrayList<String>();
 		protocCmd.add(cmd);
+		String shadePkg = "com.github.os72.protobuf" + protocVersion.mVersion;
 		for (String arg : argList) {
 			if (arg.startsWith("--java_shaded_out=")) {
 				javaShadedOutDir = arg.split("--java_shaded_out=")[1];
@@ -77,10 +78,11 @@ public class Protoc
 			else if (arg.equals("--include_std_types")) {
 				File stdTypeDir = new File(new File(cmd).getParentFile().getParentFile(), "include");
 				protocCmd.add("-I" + stdTypeDir.getAbsolutePath());
-			}
-			else {
+			} else if (arg.startsWith("--java_shade_pkg")) {
+				shadePkg = arg.split("--java_shade_pkg")[1];
+			} else {
 				ProtocVersion v = getVersion(arg);
-				if (v != null) protocVersion = v; else protocCmd.add(arg);				
+				if (v != null) { protocVersion = v; } else { protocCmd.add(arg); }
 			}
 		}
 		
@@ -105,17 +107,17 @@ public class Protoc
 		
 		if (javaShadedOutDir != null) {
 			log("shading (version " + protocVersion + "): " + javaShadedOutDir);
-			doShading(new File(javaShadedOutDir), protocVersion.mVersion);
+			doShading(new File(javaShadedOutDir), shadePkg);
 		}
 		
 		return exitCode;
 	}
 
-	public static void doShading(File dir, String version) throws IOException {
+	public static void doShading(File dir, String shadePkg) throws IOException {
 		if (dir.listFiles() == null) return;
 		for (File file : dir.listFiles()) {
 			if (file.isDirectory()) {
-				doShading(file, version);
+				doShading(file, shadePkg);
 			}
 			else if (file.getName().endsWith(".java")) {
 				//log(file.getPath());
@@ -130,7 +132,7 @@ public class Protoc
 					br = new BufferedReader(new FileReader(file));
 					String line;
 					while ((line = br.readLine()) != null) {
-						pw.println(line.replace("com.google.protobuf", "com.github.os72.protobuf" + version));
+						pw.println(line.replace("com.google.protobuf", shadePkg));
 					}
 					pw.close();
 					br.close();
