@@ -90,7 +90,7 @@ public class ProtocTest
 	public void testRunProtocCompileShade() throws Exception {
 
 		{
-			String shadePackage = "a.test.package";
+			String shadePackage = "a.test.pkg";
 			String outDir = "target/test-protoc-shaded-241";
 			new File(outDir).mkdirs();
 			String[] args = {"-v2.4.1", "--java_shaded_out="+outDir, sPersonSchemaFile,
@@ -99,7 +99,7 @@ public class ProtocTest
 			assertHasGeneratedFile(outDir, shadePackage);
 		}
 		{
-			String shadePackage = "a.test.package";
+			String shadePackage = "a.test.pkg";
 			String outDir = "target/test-protoc-shaded-250";
 			new File(outDir).mkdirs();
 			String[] args = {"-v2.5.0", "--java_shaded_out="+outDir, sPersonSchemaFile};
@@ -107,7 +107,7 @@ public class ProtocTest
 			assertHasGeneratedFile(outDir, shadePackage);
 		}
 		{
-			String shadePackage = "a.test.package";
+			String shadePackage = "a.test.pkg";
 			String outDir = "target/test-protoc-shaded-261";
 			new File(outDir).mkdirs();
 			String[] args = {"-v2.6.1", "--java_shaded_out="+outDir, sPersonSchemaFile};
