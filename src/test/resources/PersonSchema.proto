@@ -1,4 +1,4 @@
-option java_package = "com.github.os72.protocjar";
+option java_package = "a.test.pkg";
 option java_outer_classname = "PersonSchema";
 
 message Person {

@@ -88,31 +88,37 @@ public class ProtocTest
 
 	@Test
 	public void testRunProtocCompileShade() throws Exception {
+
 		{
+			String shadePackage = "a.test.pkg";
 			String outDir = "target/test-protoc-shaded-241";
 			new File(outDir).mkdirs();
-			String[] args = {"-v2.4.1", "--java_shaded_out="+outDir, sPersonSchemaFile};
+			String[] args = {"-v2.4.1", "--java_shaded_out="+outDir, sPersonSchemaFile,
+			"--java_shade_pkg=" + shadePackage};
 			assertEquals(0, Protoc.runProtoc(args));
-			assertHasGeneratedFile(outDir);
+			assertHasGeneratedFile(outDir, shadePackage);
 		}
 		{
+			String shadePackage = "a.test.pkg";
 			String outDir = "target/test-protoc-shaded-250";
 			new File(outDir).mkdirs();
 			String[] args = {"-v2.5.0", "--java_shaded_out="+outDir, sPersonSchemaFile};
 			assertEquals(0, Protoc.runProtoc(args));
-			assertHasGeneratedFile(outDir);
+			assertHasGeneratedFile(outDir, shadePackage);
 		}
 		{
+			String shadePackage = "a.test.pkg";
 			String outDir = "target/test-protoc-shaded-261";
 			new File(outDir).mkdirs();
 			String[] args = {"-v2.6.1", "--java_shaded_out="+outDir, sPersonSchemaFile};
 			assertEquals(0, Protoc.runProtoc(args));
-			assertHasGeneratedFile(outDir);
+			assertHasGeneratedFile(outDir, shadePackage);
 		}
 	}
 
-	private static void assertHasGeneratedFile(String outDir) {
-		assertTrue(new File(outDir + "/com/github/os72/protocjar/PersonSchema.java").exists());
+	private static void assertHasGeneratedFile(String outDir, String shadePkg) {
+		String pkgDir = shadePkg.replace(".", File.separator);
+		assertTrue(new File(outDir + "/" + pkgDir + "/" + "PersonSchema.java").exists());
 	}
 
 	static final String sPersonSchemaFile = "src/test/resources/PersonSchema.proto";
