@@ -232,7 +232,7 @@ public class Protoc
 		File exeFile = new File(tmpFile.getParentFile(), "protocjar.webcache/" + exeName);
 		exeFile.getParentFile().mkdirs();
 		if (!exeFile.exists()) {
-			URL exeUrl = new URL("http://central.maven.org/maven2/" + exeName);
+			URL exeUrl = new URL("https://repo.maven.apache.org/maven2/" + exeName);
 			log("downloading: " + exeUrl);
 			
 			InputStream is = null;
@@ -333,7 +333,8 @@ public class Protoc
 		"include/google/protobuf/wrappers.proto",
 	};
 
-	static Map<String,String[]> sStdTypesMap = new HashMap<String,String[]>();
+	static Map<String, String[]> sStdTypesMap = new HashMap<String, String[]>();
+
 	static {
 		sStdTypesMap.put("2", sStdTypesProto2);
 		sStdTypesMap.put("3", sStdTypesProto3);

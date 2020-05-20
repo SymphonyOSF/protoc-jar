@@ -29,5 +29,8 @@
     <fileSet>
       <directory>bin_320</directory>
     </fileSet>
+    <fileSet>
+      <directory>bin_3110</directory>
+    </fileSet>
   </fileSets>
 </assembly>

@@ -22,8 +22,7 @@ import org.junit.Test;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
-public class ProtocTest
-{
+public class ProtocTest {
 	@Test
 	public void testRunProtocBasic() throws Exception {
 		{
@@ -111,6 +110,14 @@ public class ProtocTest
 			String outDir = "target/test-protoc-shaded-261";
 			new File(outDir).mkdirs();
 			String[] args = {"-v2.6.1", "--java_shaded_out="+outDir, sPersonSchemaFile};
+			assertEquals(0, Protoc.runProtoc(args));
+			assertHasGeneratedFile(outDir, shadePackage);
+		}
+		{
+			String shadePackage = "a.test.pkg";
+			String outDir = "target/test-protoc-shaded-3110";
+			new File(outDir).mkdirs();
+			String[] args = {"-v3.11.0", "--java_shaded_out="+outDir, sPersonSchemaFile};
 			assertEquals(0, Protoc.runProtoc(args));
 			assertHasGeneratedFile(outDir, shadePackage);
 		}

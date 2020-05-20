@@ -49,6 +49,7 @@ public class ProtocVersion
 
 	private static Map<String,String> sVersionMap = new HashMap<String,String>();
 	static {
+		sVersionMap.put("-v3110", "3110");
 		sVersionMap.put("-v320", "320");
 		sVersionMap.put("-v310", "320");
 		sVersionMap.put("-v300", "320");
