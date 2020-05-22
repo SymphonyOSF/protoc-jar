@@ -1,6 +1,85 @@
 protoc-jar release notes
 ========================
 
+#### 3.11.4 (7-Mar-2020)
+* Upgrade to protoc 3.11.4
+* Shading fix for version 3.11.1 or higher (issue #78)
+* Improve log output when using default maven settings (issue #77)
+
+#### 3.11.1 (8-Dec-2019)
+* Upgrade to protoc 3.11.1
+* Small enhancement for shading naming convention
+
+#### 3.10.1 (28-Nov-2019)
+* Upgrade to protoc 3.10.1 (issue #73)
+
+#### 3.9.2 (28-Nov-2019)
+* Upgrade to protoc 3.9.2 (issue #72)
+
+#### 3.8.0 (9-Jun-2019)
+* Upgrade to protoc 3.8.0 (issue #71)
+
+#### 3.7.1 (16-May-2019)
+* Upgrade to protoc 3.7.1 (issue #66)
+* Fix: normalize download URL path (issue #67)
+
+#### 3.7.0.1 (22-Mar-2019)
+* Support download via maven mirror and/or proxy (issue #57)
+
+#### 3.7.0 (4-Mar-2019, 13-Mar-2019)
+* Upgrade to protoc 3.7.0
+* Update maven central download URL (https://repo.maven.apache.org/maven2/)
+* Supports FreeBSD/x86, Solaris/x86 (freebsd-x86_64, sunos-x86_64)
+* Supports Linux/ARM, Linux/POWER8, now provided by Google (linux-aarch_64, linux-ppcle_64)
+
+#### 3.6.0.1 (15-Dec-2018)
+* Fix: download can fail/freeze silently (issue #56)
+* Set download connection timeout (5 sec)
+* Supports FreeBSD/x86, Solaris/x86, Linux/POWER8 (freebsd-x86_64, sunos-x86_64, linux-ppcle_64)
+* Supports Linux/ARM, provided by Google (linux-aarch_64)
+
+#### 3.6.0 (30-Jun-2018)
+* Upgrade to protoc 3.6.0
+* Support capturing stdout/stderr in API (issue #48)
+* Supports FreeBSD/x86, Linux/POWER8 (freebsd-x86_64, linux-ppcle_64)
+* Supports Linux/ARM, provided by Google (linux-aarch_64)
+
+#### 3.5.1.1 (27-Jan-2018)
+* Fix regression in shading (due to incorrect version formatting)
+
+#### 3.5.1 (20-Jan-2018)
+* Upgrade to protoc 3.5.1
+* Supports FreeBSD/x86, Linux/POWER8 (freebsd-x86_64, linux-ppcle_64)
+* Supports Linux/ARM, provided by Google (linux-aarch_64)
+
+#### 3.5.0 (28-Nov-2017)
+* Upgrade to protoc 3.5.0
+* Supports FreeBSD/x86, Linux/POWER8 (freebsd-x86_64, linux-ppcle_64)
+* Supports Linux/ARM, provided by Google now (linux-aarch_64)
+
+#### 3.4.0.2 (12-Nov-2017)
+* Support for Linux on ARM platform (linux-aarch_64; 2.4.1, 2.6.1, 3.4.0)
+* Fix: download would not replace existing file (eg, maven-metadata.xml)
+
+#### 3.4.0.1 (29-Sep-2017)
+* Support for Linux on POWER8 platform (linux-ppcle_64)
+* Support for FreeBSD on x86 platform (freebsd-x86_64)
+* Support unbundled binaries with automatic download from maven central
+* Remove 3.x version map to 3.4.0
+
+#### 3.4.0 (29-Aug-2017)
+* Upgrade to protoc 3.4.0
+* Map previous 3.x versions to 3.4.0 for backward compatibility
+* Support POWER8 (ppc64le) platform (protoc 3.4.0 only)
+
+#### 3.3.0.1 (22-Jun-2017)
+* Use alternative dir (user.home) if execution in temp dir fails (issue #24)
+
+#### 3.3.0 (26-May-2017)
+* Upgrade to protoc 3.3.0
+* Map 3.0.0, 3.1.0, 3.2.0 to 3.3.0 for backward compatibility
+* Fix for shading when tmp dir and source code are on different filesystems (option `--java_shaded_out`)
+
 #### 3.2.0.1 (2-Apr-2017)
 * Separate proto3 and proto2 standard types (option `--include_std_types`)
 * Better error message for unsupported versions (issue #19)
