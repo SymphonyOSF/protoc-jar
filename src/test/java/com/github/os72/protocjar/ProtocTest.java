@@ -22,8 +22,7 @@ import java.io.File;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
-public class ProtocTest
-{
+public class ProtocTest {
 	@Test
 	public void testRunProtocBasic() throws Exception {
 		log("testRunProtocBasic");
@@ -48,7 +47,7 @@ public class ProtocTest
 			assertEquals(0, Protoc.runProtoc(args));
 		}
 		{
-			String[] args = {"--version", "-v3.5.0-SNAPSHOT"}; // not embedded, should trigger download
+			String[] args = {"--version", "-v3.10.0"}; // not embedded, should trigger download
 			assertEquals(0, Protoc.runProtoc(args));
 		}
 	}
@@ -67,7 +66,7 @@ public class ProtocTest
 			assertEquals(0, Protoc.runProtoc(args));
 		}
 		{
-			String[] args = {"--version", "-v:com.github.os72:protoc:3.4.0-SNAPSHOT"};
+			String[] args = {"--version", "-v:com.github.os72:protoc:3.7.0"};
 			assertEquals(0, Protoc.runProtoc(args));
 		}
 	}
@@ -105,7 +104,7 @@ public class ProtocTest
 		log("testJavaShadingVersion");
 		assertEquals("123", Protoc.getJavaShadingVersion("1.2.3"));
 		assertEquals("123", Protoc.getJavaShadingVersion("123"));
-		assertEquals("_3_11_1", Protoc.getJavaShadingVersion("3.11.1"));
+		assertEquals("3111", Protoc.getJavaShadingVersion("3.11.1"));
 		assertEquals("_3_11_1", Protoc.getJavaShadingVersion("_3_11_1"));
 	}
 
@@ -146,11 +145,11 @@ public class ProtocTest
 		assertTrue(new File(outDir + "/com/github/os72/protocjar/PersonSchema.java").exists());
 	}
 
-	static void log(Object msg) {
+	private static void log(Object msg) {
 		System.out.println("protoc-jar-test: " + msg);
 	}
 
-	static final String sPersonSchemaFile = "src/test/resources/PersonSchema.proto";
-	static final String sStdTypeExampleFile2 = "src/test/resources/StdTypeExample2.proto";
-	static final String sStdTypeExampleFile3 = "src/test/resources/StdTypeExample3.proto";
+	private static final String sPersonSchemaFile = "src/test/resources/PersonSchema.proto";
+	private static final String sStdTypeExampleFile2 = "src/test/resources/StdTypeExample2.proto";
+	private static final String sStdTypeExampleFile3 = "src/test/resources/StdTypeExample3.proto";
 }

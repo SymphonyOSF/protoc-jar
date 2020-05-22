@@ -33,8 +33,10 @@ import java.util.List;
 import java.util.Map;
 import java.util.Properties;
 
-public class Protoc
-{
+public class Protoc {
+	private static final String DEFAULT_SHADED_PKG = "com.github.os72.protobuf";
+	private static final String ORIGINAL_PKG = "com.google.protobuf";
+
 	public static void main(String[] args) {
 		try {
 			if (args.length > 0 && args[0].equals("-pp")) { // print platform
@@ -93,7 +95,7 @@ public class Protoc
 		
 		List<String> protocCmd = new ArrayList<String>();
 		protocCmd.add(cmd);
-		String shadePkg = "com.github.os72.protobuf";
+		String shadedPkg = DEFAULT_SHADED_PKG;
 		for (String arg : argList) {
 			if (arg.startsWith("--java_shaded_out=")) {
 				javaShadedOutDir = arg.split("--java_shaded_out=")[1];
@@ -103,8 +105,9 @@ public class Protoc
 				File stdTypeDir = new File(new File(cmd).getParentFile().getParentFile(), "include");
 				protocCmd.add("-I" + stdTypeDir.getAbsolutePath());
 			} else if (arg.startsWith("--java_shade_pkg")) {
-				shadePkg = arg.split("--java_shade_pkg")[1];
-			} else {
+				shadedPkg = arg.split("--java_shade_pkg")[1];
+			}
+			else {
 				ProtocVersion v = getVersion(arg);
 				if (v != null) protocVersion = v; else protocCmd.add(arg);				
 			}
@@ -131,23 +134,23 @@ public class Protoc
 		
 		if (javaShadedOutDir != null) {
 			log("shading (version " + protocVersion + "): " + javaShadedOutDir);
-			doShading(new File(javaShadedOutDir), shadePkg, protocVersion.mVersion);
+			doShading(new File(javaShadedOutDir), shadedPkg, protocVersion.mVersion);
 		}
 		
 		return exitCode;
 	}
 
-	public static void doShading(File dir, String shadePkg, String version) throws IOException {
+	public static void doShading(File dir, String shadedPkg, String version) throws IOException {
 		if (dir.listFiles() == null) return;
 
-		if(shadePkg == null || "".equals(shadePkg)) {
-			shadePkg = "com.github.os72.protobuf";
+		if(shadedPkg == null || "".equals(shadedPkg)) {
+			shadedPkg = DEFAULT_SHADED_PKG;
 		}
 
 		String shadingVersion = getJavaShadingVersion(version);
 		for (File file : dir.listFiles()) {
 			if (file.isDirectory()) {
-				doShading(file, shadePkg, version);
+				doShading(file, shadedPkg, version);
 			}
 			else if (file.getName().endsWith(".java")) {
 				//log(file.getPath());
@@ -162,7 +165,7 @@ public class Protoc
 					br = new BufferedReader(new FileReader(file));
 					String line;
 					while ((line = br.readLine()) != null) {
-						pw.println(line.replace("com.google.protobuf", shadePkg + shadingVersion));
+						pw.println(line.replace(ORIGINAL_PKG, shadedPkg + shadingVersion));
 					}
 					pw.close();
 					br.close();
@@ -433,8 +436,7 @@ public class Protoc
 
 	static String getJavaShadingVersion(String version) {
 		if (!version.contains(".")) return version;
-		else if (version.length() <= 5) return version.replace(".", ""); // "1.2.3" -> "123"
-		else return "_" + version.replace(".", "_"); // "3.11.1" -> "_3_11_1"
+		return version.replace(".", ""); // "1.2.3" -> "123"
 	}
 
 	static ProtocVersion getVersion(String spec) {

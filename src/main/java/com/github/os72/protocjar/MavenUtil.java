@@ -28,8 +28,7 @@ import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
-public class MavenUtil
-{
+public class MavenUtil {
 	public static class MavenSettings
 	{
 		public String mCentralUrl = "https://repo.maven.apache.org/maven2/";
